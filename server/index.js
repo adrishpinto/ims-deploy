@@ -23,7 +23,13 @@ db.once("open", () => console.log("Database Connected..."));
 app.get("/", (req, res) => {
   res.json("hello");
 });
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:5173"], // Add your frontend's URL here
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allow the necessary HTTP methods
+    credentials: true, // If you are using cookies or sessions
+  })
+);
 app.use(express.json());
 app.use(orderRouter);
 app.use(regRouter);
